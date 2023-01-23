@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using SuperShopping.ProductAPI.DTO;
+using SuperShopping.ProductAPI.Infrastructure.Exceptions;
+using SuperShopping.ProductAPI.Models;
 using SuperShopping.ProductAPI.Repository;
 
 namespace SuperShopping.ProductAPI.Service;
@@ -13,9 +15,21 @@ public class ProductService : IProductService
         this.repository = repository;
         this.mapper = mapper;
     }
-    public Task<ProductDTO> CreateProductAsync(ProductCreationDTO product)
+    public async Task<ProductDTO> CreateProductAsync(ProductCreationDTO product)
     {
-        throw new NotImplementedException();
+        var category = await repository.Category.GetCategoryAsync(product.CategoryId, false);
+        if (category is null)
+        {
+            throw new CategoryNotFoundException(product.CategoryId);
+        }
+
+        var productToInsert = mapper.Map<Product>(product);
+        repository.Product.CreateProduct(productToInsert);
+        await repository.SaveAsync();
+
+
+
+        return mapper.Map<ProductDTO>(productToInsert);
     }
 
     public Task DeleteProductAsync(int ProductId, bool trackChanges)

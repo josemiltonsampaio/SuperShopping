@@ -6,7 +6,7 @@ namespace SuperShopping.ProductAPI.Repository;
 public class BaseRepository<T> : IBaseRepository<T> where T : class
 
 {
-    private readonly AppDbContext context;
+    protected readonly AppDbContext context;
 
     public BaseRepository(AppDbContext context)
     {
@@ -39,7 +39,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
             return context.Set<T>().Where(query);
         }
 
-        return context.Set<T>().AsNoTracking();
+        return context.Set<T>().Where(query).AsNoTracking();
     }
 
     public void Update(T entity)

@@ -9,7 +9,11 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
     }
 
-    public void CreateProduct(Product product) => Add(product);
+    public void CreateProduct(Product product)
+    {
+        Add(product);
+        context.Entry(product).Reference(p => p.Category).Load();
+    }
 
     public void DeleteProduct(Product product) => Delete(product);
 
