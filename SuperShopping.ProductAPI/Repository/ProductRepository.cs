@@ -24,6 +24,6 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
 
     public async Task<Product> GetProductAsync(int id, bool trackChanges)
     {
-        return await GettAllByQuery(p => p.Id == id, trackChanges).SingleOrDefaultAsync();
+        return await GettAllByQuery(p => p.Id == id, trackChanges).Include(p => p.Category).SingleOrDefaultAsync();
     }
 }

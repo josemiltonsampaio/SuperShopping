@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SuperShopping.ProductAPI.DTO;
+using SuperShopping.ProductAPI.Infrastructure.Exceptions;
 using SuperShopping.ProductAPI.Models;
 using SuperShopping.ProductAPI.Repository;
 
@@ -23,14 +24,25 @@ public class CategoryService : ICategoryService
         return mapper.Map<CategoryDTO>(categoryToCreate);
     }
 
-    public Task DeleteCategoryAsync(int categoryId, bool trackChanges)
+    public async Task DeleteCategoryAsync(int categoryId)
     {
-        throw new NotImplementedException();
+
+        var categoryEntity = await repositoryManager.Category.GetCategoryAsync(categoryId, true);
+
+        if (await repositoryManager.Category.CategoryInUseAsync(categoryId))
+        {
+            throw new CategoryInUseDeleteException(categoryId);
+        }
+
+        repositoryManager.Category.DeleteCategory(categoryEntity);
+        await repositoryManager.SaveAsync();
+
+
     }
 
-    public Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync(bool trackChanges)
+    public async Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync(bool trackChanges)
     {
-        throw new NotImplementedException();
+        return mapper.Map<IList<CategoryDTO>>(await repositoryManager.Category.GetAllCategoriesAsync(trackChanges));
     }
 
     public async Task<CategoryDTO> GetCategoryAsync(int id, bool trackChanges)
@@ -39,8 +51,14 @@ public class CategoryService : ICategoryService
         return mapper.Map<CategoryDTO>(category);
     }
 
-    public Task UpdateCategoryAsync(int categoryId, CategoryUpdateDTO categoryUpdateDTO, bool trackChanges)
+    public async Task UpdateCategoryAsync(int categoryId, CategoryUpdateDTO categoryUpdateDTO)
     {
-        throw new NotImplementedException();
+        var categoryEntity = await repositoryManager.Category.GetCategoryAsync(categoryId, true);
+        if (categoryEntity is null)
+        {
+            throw new CategoryNotFoundException(categoryId);
+        }
+        mapper.Map(categoryUpdateDTO, categoryEntity);
+        await repositoryManager.SaveAsync();
     }
 }

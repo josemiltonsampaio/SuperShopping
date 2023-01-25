@@ -19,10 +19,10 @@ public class ProductController : ControllerBase
         return Ok(await serviceManager.Product.GetAllProductsAsync(false));
     }
 
-    [HttpGet("{id:int}", Name = nameof(GetProduct))]
-    public async Task<IActionResult> GetProduct(int id)
+    [HttpGet("{productId:int}", Name = nameof(GetProduct))]
+    public async Task<IActionResult> GetProduct(int productId)
     {
-        return Ok(await serviceManager.Product.GetProductAsync(id, false));
+        return Ok(await serviceManager.Product.GetProductAsync(productId, false));
     }
 
     [HttpPost]
@@ -34,5 +34,25 @@ public class ProductController : ControllerBase
         }
         var createdProduct = await serviceManager.Product.CreateProductAsync(product);
         return CreatedAtAction(nameof(GetProduct), new { createdProduct.Id }, createdProduct);
+    }
+
+    [HttpPut("{productId:int}")]
+    public async Task<IActionResult> UpdateProduct(int productId, [FromBody] ProductUpdateDTO productUpdateDTO)
+    {
+        if (!ModelState.IsValid)
+        {
+            return UnprocessableEntity(ModelState);
+        }
+
+        await serviceManager.Product.UpdateProductAsync(productId, productUpdateDTO);
+
+        return NoContent();
+    }
+
+    [HttpDelete("{productId:int}")]
+    public async Task<IActionResult> DeleteProduct(int productId)
+    {
+        await serviceManager.Product.DeleteProductAsync(productId);
+        return NoContent();
     }
 }

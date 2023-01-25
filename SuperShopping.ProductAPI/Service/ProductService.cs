@@ -28,13 +28,14 @@ public class ProductService : IProductService
         await repository.SaveAsync();
 
 
-
         return mapper.Map<ProductDTO>(productToInsert);
     }
 
-    public Task DeleteProductAsync(int ProductId, bool trackChanges)
+    public async Task DeleteProductAsync(int productId)
     {
-        throw new NotImplementedException();
+        var product = await repository.Product.GetProductAsync(productId, true);
+        repository.Product.DeleteProduct(product);
+        await repository.SaveAsync();
     }
 
     public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync(bool trackChanges)
@@ -44,13 +45,23 @@ public class ProductService : IProductService
 
     }
 
-    public Task<ProductDTO> GetProductAsync(int productId, bool trackChanges)
+    public async Task<ProductDTO> GetProductAsync(int productId, bool trackChanges)
     {
-        throw new NotImplementedException();
+        var product = await repository.Product.GetProductAsync(productId, trackChanges);
+        return mapper.Map<ProductDTO>(product);
     }
 
-    public Task UpdateProductAsync(int ProductId, ProductUpdateDTO productForUpdate, bool trackChanges)
+    public async Task UpdateProductAsync(int productId, ProductUpdateDTO productForUpdate)
     {
-        throw new NotImplementedException();
+        var productEntity = await repository.Product.GetProductAsync(productId, true);
+
+        var category = await repository.Category.GetCategoryAsync(productForUpdate.CategoryId, false);
+        if (category is null)
+        {
+            throw new CategoryNotFoundException(productForUpdate.CategoryId);
+        }
+
+        mapper.Map(productForUpdate, productEntity);
+        await repository.SaveAsync();
     }
 }
