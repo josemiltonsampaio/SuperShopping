@@ -36,7 +36,7 @@ namespace SuperShopping.ProductAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("SuperShopping.ProductAPI.Models.Product", b =>
@@ -71,7 +71,7 @@ namespace SuperShopping.ProductAPI.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("SuperShopping.ProductAPI.Models.Product", b =>
