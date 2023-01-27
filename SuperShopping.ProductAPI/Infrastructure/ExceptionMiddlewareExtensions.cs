@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using SuperShopping.ProductAPI.Infrastructure.Exceptions;
-using SuperShopping.ProductAPI.Log;
+using SuperShopping.ProductAPI.Logging;
 
 namespace SuperShopping.ProductAPI.Infrastructure;
 public static class ExceptionMiddlewareExtensions

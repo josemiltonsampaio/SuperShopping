@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using SuperShopping.ProductAPI.Data;
 using SuperShopping.ProductAPI.Infrastructure;
-using SuperShopping.ProductAPI.Log;
+using SuperShopping.ProductAPI.Logging;
 using SuperShopping.ProductAPI.Repository;
 using SuperShopping.ProductAPI.Service;
 
