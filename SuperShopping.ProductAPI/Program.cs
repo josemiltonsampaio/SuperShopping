@@ -22,7 +22,17 @@ builder.Services.AddTransient<IServiceManager, ServiceManager>();
 builder.Services.AddTransient<IRepositoryManager, RepositoryManager>();
 builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
 
 var app = builder.Build();
 
@@ -36,7 +46,7 @@ if (app.Environment.IsProduction())
 
 // Configure the HTTP request pipeline.
 
-app.UseCors(opt => opt.AllowAnyOrigin().AllowAnyMethod());
+app.UseCors("AllowAll");
 
 app.UseSwagger();
 app.UseSwaggerUI();
