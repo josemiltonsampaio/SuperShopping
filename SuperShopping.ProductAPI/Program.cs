@@ -22,6 +22,8 @@ builder.Services.AddTransient<IServiceManager, ServiceManager>();
 builder.Services.AddTransient<IRepositoryManager, RepositoryManager>();
 builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 var logger = app.Services.GetRequiredService<ILoggerManager>();
@@ -33,6 +35,8 @@ if (app.Environment.IsProduction())
 }
 
 // Configure the HTTP request pipeline.
+
+app.UseCors(opt => opt.AllowAnyOrigin().AllowAnyMethod());
 
 app.UseSwagger();
 app.UseSwaggerUI();
