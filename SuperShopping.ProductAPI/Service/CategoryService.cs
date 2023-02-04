@@ -48,6 +48,10 @@ public class CategoryService : ICategoryService
     public async Task<CategoryDTO> GetCategoryAsync(int id, bool trackChanges)
     {
         var category = await repositoryManager.Category.GetCategoryAsync(id, trackChanges);
+        if (category is null)
+        {
+            throw new CategoryNotFoundException(id);
+        }
         return mapper.Map<CategoryDTO>(category);
     }
 
