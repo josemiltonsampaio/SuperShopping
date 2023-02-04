@@ -22,6 +22,7 @@ builder.Services.AddTransient<IServiceManager, ServiceManager>();
 builder.Services.AddTransient<IRepositoryManager, RepositoryManager>();
 builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
