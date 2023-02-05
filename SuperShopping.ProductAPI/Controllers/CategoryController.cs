@@ -17,13 +17,13 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = ("user"))]
+    [Authorize(Roles = ("user,admin"))]
     public async Task<IActionResult> GetCategories()
     {
         return Ok(await serviceManager.Category.GetAllCategoriesAsync(false));
     }
 
-    [Authorize(Roles = ("user"))]
+    [Authorize(Roles = ("user,admin"))]
     [HttpGet("{id:int}", Name = nameof(GetCategories))]
     public async Task<IActionResult> GetCategory(int id)
     {

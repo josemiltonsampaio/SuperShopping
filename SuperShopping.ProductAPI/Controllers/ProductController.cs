@@ -16,14 +16,14 @@ public class ProductController : ControllerBase
         this.serviceManager = serviceManager;
     }
     [HttpGet]
-    [Authorize(Roles = "user")]
+    [Authorize(Roles = "user,admin")]
     public async Task<IActionResult> GetAllProducts()
     {
         return Ok(await serviceManager.Product.GetAllProductsAsync(false));
     }
 
     [HttpGet("{productId:int}", Name = nameof(GetProduct))]
-    [Authorize(Roles = "user")]
+    [Authorize(Roles = "user,admin")]
     public async Task<IActionResult> GetProduct(int productId)
     {
         return Ok(await serviceManager.Product.GetProductAsync(productId, false));
