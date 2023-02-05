@@ -25,6 +25,9 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(opt =>
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<RegisterService>();
+builder.Services.AddScoped<LoginService>();
+builder.Services.AddScoped<TokenService>();
+
 builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 
 
