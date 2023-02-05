@@ -7,14 +7,16 @@ using System.Text;
 namespace SuperShopping.AuthAPI.Services;
 public class TokenService
 {
-    public string CreateToken(User user)
+    public string CreateToken(User user, List<string> roles)
     {
-        Claim[] claims = new Claim[]
+        var claims = new List<Claim>
         {
             new Claim("username",user.UserName),
             new Claim("id",user.Id.ToString()),
             new Claim(ClaimTypes.DateOfBirth,user.DateOfBirth.ToString())
         };
+
+        roles.ForEach((role) => claims.Add(new Claim(ClaimTypes.Role, role)));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysupersecretkey#123"));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

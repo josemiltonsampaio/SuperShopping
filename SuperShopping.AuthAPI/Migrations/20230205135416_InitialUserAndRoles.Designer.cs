@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SuperShopping.AuthAPI.Data;
 
@@ -11,9 +12,11 @@ using SuperShopping.AuthAPI.Data;
 namespace SuperShopping.AuthAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230205135416_InitialUserAndRoles")]
+    partial class InitialUserAndRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,14 +58,14 @@ namespace SuperShopping.AuthAPI.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "72a49daf-1f4d-4e56-81a1-6c9e83999d24",
+                            ConcurrencyStamp = "445d4358-38c1-44ca-beb2-70391d0f9ad4",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "7fc5bf49-34fe-4623-8e0e-002b297ee2cc",
+                            ConcurrencyStamp = "5028f177-3e02-45b6-a625-fcc53c793c85",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -150,13 +153,6 @@ namespace SuperShopping.AuthAPI.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            RoleId = 1
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -253,16 +249,16 @@ namespace SuperShopping.AuthAPI.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "40e0f362-0991-440c-bbd0-5b2a04b71174",
+                            ConcurrencyStamp = "cc28fa8d-8297-49cb-aab4-5ad6fce4f1ba",
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBv8p5TiYjOkkGgNAFOhdvuN6Mq4QjZBoT7tt9V3zNrB0NZDAA1wUESOc3qwPAY8gg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH635JHjNX9WF6dXwCjPVvZLn3LwN9aa/74ufrjzHuBkfMV6Brod19T4XgC75K4rtg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "94edc144-8b8e-4013-8b68-a17134c182d1",
+                            SecurityStamp = "55496345-72f9-4b6f-98fa-2ede26f4e45e",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

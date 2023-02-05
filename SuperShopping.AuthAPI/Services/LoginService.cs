@@ -26,8 +26,9 @@ public class LoginService
         }
 
         var user = _signInManager.UserManager.Users.FirstOrDefault(u => u.NormalizedUserName == loginUserDto.UserName.ToUpper());
+        var roles = await _signInManager.UserManager.GetRolesAsync(user);
 
-        var token = _tokenService.CreateToken(user);
+        var token = _tokenService.CreateToken(user, roles.ToList());
 
         return token;
     }
