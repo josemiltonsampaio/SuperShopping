@@ -2,7 +2,7 @@ name: Build and deploy .NET Core application to Web App apiauthX with API Manage
 on:
   push:
     branches:
-    - authentication
+    - inicial
 env:
   AZURE_WEBAPP_NAME: apiauthX
   AZURE_WEBAPP_PACKAGE_PATH: SuperShopping.AuthAPI/publish
@@ -64,7 +64,7 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-        publish-profile: ${{ secrets.apiauthX_28E3 }}
+        publish-profile: ${{ secrets.apiauthX_17F6 }}
     - name: Azure Login
       uses: azure/login@v1
       with:
