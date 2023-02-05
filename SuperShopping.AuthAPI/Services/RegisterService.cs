@@ -20,7 +20,7 @@ public class RegisterService
     }
 
 
-    public async Task<string> RegisterUser(CreateUserDto createUserDto)
+    public async Task<RegisterDto> RegisterUser(CreateUserDto createUserDto)
     {
         if (createUserDto.Password != createUserDto.RePassword)
         {
@@ -35,23 +35,36 @@ public class RegisterService
             throw new Exception($"Error while trying to create a new user. {string.Join(", ", errors)}");
         }
 
+        var resultRole = await _userManager.AddToRoleAsync(newUser, "user");
+        if (!resultRole.Succeeded)
+        {
+            var errors = resultRole.Errors.Select(e => e.Description).ToList();
+            throw new Exception($"Error while trying to create a new user. {string.Join(", ", errors)}");
+        }
+
         var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
         //var encodedCode = HttpUtility.UrlEncode(confirmationToken);
 
-        var link = _linkGenerator.GetUriByAction(_httpContextAccessor.HttpContext, "ConfirmUser", "Register", new { Id = newUser.Id, Token = confirmationToken });
+        //var link = _linkGenerator.GetUriByAction(_httpContextAccessor.HttpContext, "ConfirmUser", "Register", new { Id = newUser.Id, Token = confirmationToken });
 
-        return link;
+        var confirmation = new RegisterDto
+        {
+            UserName = newUser.UserName,
+            ConfirmationToken = confirmationToken
+        };
+
+        return confirmation;
     }
 
-    public async Task ActivateUser(int id, string token)
+    public async Task ActivateUser(RegisterDto registerDto)
     {
-        var user = _userManager.Users.SingleOrDefault(u => u.Id == id);
+        var user = _userManager.Users.SingleOrDefault(u => u.NormalizedUserName == registerDto.UserName.ToUpper());
         if (user == null)
         {
             throw new BadHttpRequestException("Error while activating user.");
         }
 
-        var confirmResult = await _userManager.ConfirmEmailAsync(user, token);
+        var confirmResult = await _userManager.ConfirmEmailAsync(user, registerDto.ConfirmationToken);
         if (!confirmResult.Succeeded)
         {
             throw new BadHttpRequestException("Error while activating user.");

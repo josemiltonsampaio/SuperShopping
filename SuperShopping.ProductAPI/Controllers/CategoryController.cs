@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SuperShopping.ProductAPI.DTO;
 using SuperShopping.ProductAPI.Service;
 
 namespace SuperShopping.ProductAPI.Controllers;
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class CategoryController : ControllerBase
 {
     private readonly IServiceManager serviceManager;
@@ -15,11 +17,13 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = ("user"))]
     public async Task<IActionResult> GetCategories()
     {
         return Ok(await serviceManager.Category.GetAllCategoriesAsync(false));
     }
 
+    [Authorize(Roles = ("user"))]
     [HttpGet("{id:int}", Name = nameof(GetCategories))]
     public async Task<IActionResult> GetCategory(int id)
     {
@@ -27,6 +31,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPut("{categoryId}")]
+    [Authorize(Roles = ("admin"))]
     public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody] CategoryUpdateDTO categoryUpdateDTO)
     {
         if (categoryUpdateDTO is null)
@@ -41,6 +46,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpDelete("{categoryId}")]
+    [Authorize(Roles = ("admin"))]
     public async Task<IActionResult> DeleteCategory(int categoryId)
     {
         await serviceManager.Category.DeleteCategoryAsync(categoryId);
@@ -48,6 +54,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = ("admin"))]
     public async Task<IActionResult> CreateCategory(CategoryCreationDTO categoryCreationDTO)
     {
         var categoryCreated = await serviceManager.Category.CreateCategoryAsync(categoryCreationDTO);
