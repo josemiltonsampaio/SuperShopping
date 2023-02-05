@@ -20,11 +20,11 @@ public class RegisterController : ControllerBase
         return Ok(await _registerService.RegisterUser(createUser));
     }
 
-    [HttpPost("{id}/{token}")]
-    public async Task<IActionResult> ConfirmUser(int id, string token)
+    [HttpPost("confirm")]
+    public async Task<IActionResult> ConfirmUser(RegisterDto registerDto)
     {
-        await _registerService.ActivateUser(id, token);
-        return Ok();
+        await _registerService.ActivateUser(registerDto);
+        return Ok("Your user was confirmed!");
     }
 
 
