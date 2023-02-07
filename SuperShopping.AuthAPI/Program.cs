@@ -30,6 +30,17 @@ builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
 
 var app = builder.Build();
 
@@ -40,6 +51,8 @@ app.ConfigureExceptionHandler(logger);
 if (app.Environment.IsDevelopment())
 {
 }
+
+app.UseCors("AllowAll");
 
 app.UseSwagger();
 app.UseSwaggerUI();
