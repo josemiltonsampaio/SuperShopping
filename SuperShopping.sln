@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperShopping.ProductAPI", "SuperShopping.ProductAPI\SuperShopping.ProductAPI.csproj", "{BF623C0A-9FE6-408C-B8A4-C21DF1576A91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperShopping.AuthAPI", "SuperShopping.AuthAPI\SuperShopping.AuthAPI.csproj", "{02E5DB2C-E711-4FD6-A675-422A72BF1D62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperShopping.AuthAPI", "SuperShopping.AuthAPI\SuperShopping.AuthAPI.csproj", "{02E5DB2C-E711-4FD6-A675-422A72BF1D62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperShopping.CartAPI", "SuperShopping.CartAPI\SuperShopping.CartAPI.csproj", "{DFD9EF62-C698-47AE-93D1-C39ECD2394FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{02E5DB2C-E711-4FD6-A675-422A72BF1D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02E5DB2C-E711-4FD6-A675-422A72BF1D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02E5DB2C-E711-4FD6-A675-422A72BF1D62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD9EF62-C698-47AE-93D1-C39ECD2394FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD9EF62-C698-47AE-93D1-C39ECD2394FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD9EF62-C698-47AE-93D1-C39ECD2394FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD9EF62-C698-47AE-93D1-C39ECD2394FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
