@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SuperShopping.ProductAPI.Data;
 using SuperShopping.ProductAPI.Models;
+using SuperShopping.ProductAPI.Repository.Interfaces;
 
 namespace SuperShopping.ProductAPI.Repository;
 public class CategoryRepository : BaseRepository<Category>, ICategoryRepository

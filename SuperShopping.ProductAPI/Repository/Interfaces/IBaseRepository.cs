@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace SuperShopping.ProductAPI.Repository;
+namespace SuperShopping.ProductAPI.Repository.Interfaces;
 public interface IBaseRepository<T>
 {
     IQueryable<T> GetAll(bool trackChanges);

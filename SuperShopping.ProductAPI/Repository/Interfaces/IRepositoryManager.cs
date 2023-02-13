@@ -1,4 +1,4 @@
-﻿namespace SuperShopping.ProductAPI.Repository;
+﻿namespace SuperShopping.ProductAPI.Repository.Interfaces;
 public interface IRepositoryManager
 {
     IProductRepository Product { get; }

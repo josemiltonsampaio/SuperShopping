@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SuperShopping.ProductAPI.Data;
+using SuperShopping.ProductAPI.Repository.Interfaces;
 using System.Linq.Expressions;
 
 namespace SuperShopping.ProductAPI.Repository;

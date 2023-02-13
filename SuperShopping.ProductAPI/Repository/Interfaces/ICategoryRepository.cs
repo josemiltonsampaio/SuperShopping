@@ -1,6 +1,6 @@
 ﻿using SuperShopping.ProductAPI.Models;
 
-namespace SuperShopping.ProductAPI.Repository;
+namespace SuperShopping.ProductAPI.Repository.Interfaces;
 public interface ICategoryRepository
 {
     Task<IEnumerable<Category>> GetAllCategoriesAsync(bool trackChanges);

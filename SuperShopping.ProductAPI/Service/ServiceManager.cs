@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using SuperShopping.ProductAPI.Repository;
+using SuperShopping.ProductAPI.Repository.Interfaces;
+using SuperShopping.ProductAPI.Service.Interfaces;
 
 namespace SuperShopping.ProductAPI.Service;
 public class ServiceManager : IServiceManager

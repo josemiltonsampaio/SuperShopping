@@ -2,7 +2,8 @@
 using SuperShopping.ProductAPI.DTO;
 using SuperShopping.ProductAPI.Infrastructure.Exceptions;
 using SuperShopping.ProductAPI.Models;
-using SuperShopping.ProductAPI.Repository;
+using SuperShopping.ProductAPI.Repository.Interfaces;
+using SuperShopping.ProductAPI.Service.Interfaces;
 
 namespace SuperShopping.ProductAPI.Service;
 public class ProductService : IProductService

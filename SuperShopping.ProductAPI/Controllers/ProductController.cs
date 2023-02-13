@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SuperShopping.ProductAPI.DTO;
-using SuperShopping.ProductAPI.Service;
+using SuperShopping.ProductAPI.Service.Interfaces;
 
 namespace SuperShopping.ProductAPI.Controllers;
 [Controller]

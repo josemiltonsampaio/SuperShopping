@@ -1,6 +1,6 @@
 ﻿using SuperShopping.ProductAPI.DTO;
 
-namespace SuperShopping.ProductAPI.Service;
+namespace SuperShopping.ProductAPI.Service.Interfaces;
 public interface ICategoryService
 {
     Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync(bool trackChanges);

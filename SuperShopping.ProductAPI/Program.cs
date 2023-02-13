@@ -6,7 +6,9 @@ using SuperShopping.ProductAPI.Data;
 using SuperShopping.ProductAPI.Infrastructure;
 using SuperShopping.ProductAPI.Logging;
 using SuperShopping.ProductAPI.Repository;
+using SuperShopping.ProductAPI.Repository.Interfaces;
 using SuperShopping.ProductAPI.Service;
+using SuperShopping.ProductAPI.Service.Interfaces;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,4 @@
-﻿namespace SuperShopping.ProductAPI.Service;
+﻿namespace SuperShopping.ProductAPI.Service.Interfaces;
 public interface IServiceManager
 {
     IProductService Product { get; }
