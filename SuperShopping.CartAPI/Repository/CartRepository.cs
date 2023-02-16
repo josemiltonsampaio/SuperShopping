@@ -70,16 +70,23 @@ public class CartRepository : ICartRepository
 
         foreach (var item in cartHeader.Items)
         {
+
             var existingItem = await _dbContext.CartItem.Include(ci => ci.CartHeader).Where(ci => ci.CartHeader.UserId == cartHeader.UserId && ci.ProductId == item.ProductId).SingleOrDefaultAsync();
             if (existingItem == null)
             {
+                if (item.Quantity == 0) continue;
+
                 existingCart.Items.Add(item);
             }
             else
             {
                 existingItem.Quantity += item.Quantity;
-            }
 
+                if (existingItem.Quantity == 0)
+                {
+                    await RemoveFromCartAsync(existingItem.Id);
+                }
+            }
         }
 
 

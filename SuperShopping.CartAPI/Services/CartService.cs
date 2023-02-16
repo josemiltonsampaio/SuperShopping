@@ -31,6 +31,7 @@ public class CartService : ICartService
     public async Task RemoveItemFromCartAsync(int cartItemId)
     {
         await _repositoryManager.CartRepository.RemoveFromCartAsync(cartItemId);
+        await _repositoryManager.SaveAsync();
     }
 
     public async Task<CartDTO> SaveOrUpdateCartAsync(CartCreationDTO cart)
