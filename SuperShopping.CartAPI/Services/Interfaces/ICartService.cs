@@ -7,5 +7,6 @@ public interface ICartService
     Task<CartDTO> SaveOrUpdateCartAsync(CartCreationDTO cart);
     Task RemoveItemFromCartAsync(int cartItemId);
     Task ClearCartAsync(int userId);
+    Task Checkout(CheckoutCreationDTO checkoutCreation);
 
 }

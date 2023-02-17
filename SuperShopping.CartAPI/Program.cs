@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SuperShopping.CartAPI.Data;
+using SuperShopping.CartAPI.Infrastructure;
+using SuperShopping.CartAPI.Logging;
 using SuperShopping.CartAPI.Repository;
 using SuperShopping.CartAPI.Repository.Interfaces;
 using SuperShopping.CartAPI.Services;
@@ -17,8 +19,12 @@ builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Conf
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
+builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 
 var app = builder.Build();
+
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+app.ConfigureExceptionHandler(logger);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

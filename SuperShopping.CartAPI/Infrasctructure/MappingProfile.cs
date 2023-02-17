@@ -13,5 +13,6 @@ public class MappingProfile : Profile
         CreateMap<CartHeader, CartCreationDTO>().ReverseMap();
         CreateMap<CartItem, CartItemDTO>().ReverseMap();
         CreateMap<CartItem, CartItemCreationDTO>().ReverseMap();
+        CreateMap<CheckoutDTO, CheckoutCreationDTO>().ReverseMap();
     }
 }

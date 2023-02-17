@@ -38,4 +38,11 @@ public class CartController : ControllerBase
         return NoContent();
     }
 
+    [HttpPost("checkout")]
+    public async Task<IActionResult> Checkout(CheckoutCreationDTO checkout)
+    {
+        await _serviceManager.CartService.Checkout(checkout);
+        return NoContent();
+    }
+
 }
