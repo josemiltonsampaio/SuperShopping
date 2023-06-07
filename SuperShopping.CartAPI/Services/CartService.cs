@@ -2,6 +2,7 @@
 using SuperShopping.CartAPI.DTO;
 using SuperShopping.CartAPI.Infrastructure.Exceptions;
 using SuperShopping.CartAPI.Models;
+using SuperShopping.CartAPI.RabbitMQSender;
 using SuperShopping.CartAPI.Repository.Interfaces;
 using SuperShopping.CartAPI.Services.Interfaces;
 
@@ -10,11 +11,13 @@ public class CartService : ICartService
 {
     private readonly IRepositoryManager _repositoryManager;
     public IMapper _mapper;
+    private IRabbitMQMessageSender _rabbitMQMessageSender;
 
-    public CartService(IRepositoryManager repositoryManager, IMapper mapper)
+    public CartService(IRepositoryManager repositoryManager, IMapper mapper, IRabbitMQMessageSender rabbitMQMessageSender)
     {
         _repositoryManager = repositoryManager;
         _mapper = mapper;
+        _rabbitMQMessageSender = rabbitMQMessageSender;
     }
 
 
@@ -56,6 +59,7 @@ public class CartService : ICartService
         checkout.DateTime = DateTime.UtcNow;
 
         //TODO: Send to RabbitMQ
+        _rabbitMQMessageSender.SendMessage(checkoutCreation, "checkoutqueue");
         //TODO: Clear the cart
 
     }

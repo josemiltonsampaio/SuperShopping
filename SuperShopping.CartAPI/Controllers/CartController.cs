@@ -9,6 +9,7 @@ public class CartController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
 
+
     public CartController(IServiceManager serviceManager)
     {
         _serviceManager = serviceManager;
@@ -42,6 +43,9 @@ public class CartController : ControllerBase
     public async Task<IActionResult> Checkout(CheckoutCreationDTO checkout)
     {
         await _serviceManager.CartService.Checkout(checkout);
+
+
+
         return NoContent();
     }
 

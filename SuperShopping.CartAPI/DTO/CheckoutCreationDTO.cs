@@ -1,5 +1,7 @@
-﻿namespace SuperShopping.CartAPI.DTO;
-public class CheckoutCreationDTO
+﻿using SuperShopping.MessageBus;
+
+namespace SuperShopping.CartAPI.DTO;
+public class CheckoutCreationDTO : BaseMessage
 {
     public int UserId { get; set; }
     public string FirstName { get; set; }

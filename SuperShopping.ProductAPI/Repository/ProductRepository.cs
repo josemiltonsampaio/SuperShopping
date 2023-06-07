@@ -21,6 +21,7 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
     public async Task<IEnumerable<Product>> GetAllProductsAsync(bool trackChanges)
     {
         return await GetAll(trackChanges).Include(p => p.Category).ToListAsync();
+        //return context.Product.FromSqlRaw<Product>("exec SP_SelectProducts").ToList();
     }
 
     public async Task<Product> GetProductAsync(int id, bool trackChanges)

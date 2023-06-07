@@ -14,8 +14,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	<PackageReference Include="NLog.Extensions.Logging" Version="5.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SuperShopping.MessageBus\SuperShopping.MessageBus.csproj" />
   </ItemGroup>
 
 </Project>
