@@ -59,7 +59,7 @@ public class CartService : ICartService
         checkout.DateTime = DateTime.UtcNow;
 
         //TODO: Send to RabbitMQ
-        _rabbitMQMessageSender.SendMessage(checkoutCreation, "checkoutqueue");
+        _rabbitMQMessageSender.SendMessage(checkout, "checkoutqueue");
         //TODO: Clear the cart
 
     }

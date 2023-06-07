@@ -1,7 +1,8 @@
-﻿using SuperShopping.MessageBus;
+﻿using SuperShopping.OrderAPI.Models;
 
-namespace SuperShopping.CartAPI.DTO;
-public class CheckoutDTO : BaseMessage
+namespace SuperShopping.OrderAPI.DTO;
+
+public class CheckoutDTO
 {
     public int Id { get; set; }
     public int UserId { get; set; }
@@ -13,5 +14,7 @@ public class CheckoutDTO : BaseMessage
     public string CardNumber { get; set; }
     public string CVV { get; set; }
     public string ExpirationDate { get; set; }
-    public CartDTO Cart { get; set; }
+    public OrderHeader Cart { get; set; }
+
+
 }

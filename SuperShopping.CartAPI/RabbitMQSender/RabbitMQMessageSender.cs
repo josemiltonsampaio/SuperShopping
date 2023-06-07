@@ -45,7 +45,7 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
             WriteIndented = true,
         };
 
-        var json = JsonSerializer.Serialize<CheckoutCreationDTO>((CheckoutCreationDTO)message, options);
+        var json = JsonSerializer.Serialize<CheckoutDTO>((CheckoutDTO)message, options);
         var body = Encoding.UTF8.GetBytes(json);
         return body;
     }
