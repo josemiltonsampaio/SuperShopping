@@ -58,9 +58,9 @@ public class CartService : ICartService
         checkout.Cart = _mapper.Map<CartDTO>(cart);
         checkout.DateTime = DateTime.UtcNow;
 
-        //TODO: Send to RabbitMQ
         _rabbitMQMessageSender.SendMessage(checkout, "checkoutqueue");
         //TODO: Clear the cart
+        //I won't implement that because I want to keep the carts, in order to make it easy to demonstrate the app
 
     }
 }

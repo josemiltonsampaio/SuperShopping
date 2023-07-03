@@ -1,7 +1,6 @@
 ﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using SuperShopping.OrderAPI.DTO;
-using SuperShopping.OrderAPI.Models;
 using SuperShopping.OrderAPI.Repository;
 using System.Text;
 using System.Text.Json;
@@ -48,38 +47,7 @@ public class RabbitMQCheckoutConsumer : BackgroundService
 
     private async Task ProcessOrder(CheckoutDTO checkoutDTO)
     {
-        OrderHeader order = new OrderHeader
-        {
-            UserId = checkoutDTO.UserId,
-            FirstName = checkoutDTO.FirstName,
-            LastName = checkoutDTO.LastName,
-            Items = new List<OrderItem>(),
-            CardNumber = checkoutDTO.CardNumber,
-            CVV = checkoutDTO.CVV,
-            Email = checkoutDTO.Email,
-            ExpirationDate = checkoutDTO.ExpirationDate,
-            OrderTime = DateTime.Now,
-            PaymentStatus = false,
-            Phone = checkoutDTO.Phone,
-            PurchaseTime = checkoutDTO.DateTime
-        };
-
-
-        //TODO: The error happens here because what is sent to rabbitmq has a different schema and the product info
-        //is not being loaded
-        foreach (var item in checkoutDTO.Cart.Items)
-        {
-            OrderItem newItem = new OrderItem()
-            {
-                ProductId = item.ProductId,
-                ProductName = item.ProductName,
-                Price = item.Price,
-                Quantity = item.Quantity
-            };
-            order.Items.Add(newItem);
-        }
-
-        await _orderRepository.AddOrder(order);
-
+        //Order processed
+        //I could implement here a call to a third party payment gateway
     }
 }

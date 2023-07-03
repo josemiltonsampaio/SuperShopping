@@ -44,8 +44,6 @@ public class CartController : ControllerBase
     {
         await _serviceManager.CartService.Checkout(checkout);
 
-
-
         return NoContent();
     }
 
