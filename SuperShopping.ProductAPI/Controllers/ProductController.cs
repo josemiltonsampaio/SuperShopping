@@ -4,7 +4,7 @@ using SuperShopping.ProductAPI.DTO;
 using SuperShopping.ProductAPI.Service.Interfaces;
 
 namespace SuperShopping.ProductAPI.Controllers;
-[Controller]
+[ApiController]
 [Route("api/[controller]")]
 [Authorize]
 public class ProductController : ControllerBase
